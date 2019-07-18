@@ -1,13 +1,16 @@
-import { IsString,MinLength, MaxLength } from 'class-validator';
+import { IsString,IsBoolean,IsDate,IsNumber} from 'class-validator';
  
 class CreateUserDto {
   @IsString( {
       each: true
   })
-  public posts: string[];
- 
-  @IsString()
-  public email: string;
+  public post: string[];
+
+  @IsNumber()
+  public number: number;
+
+  @IsBoolean()
+  public boolean: boolean;
  
   @IsString()
   public name: string;

@@ -7,6 +7,8 @@ import userModel from './user.model';
 import validationMiddleware from '../middleware/validation.middleware';
 import CreatePostDto from './post.dto';
 import CreateUserDto from './user.dto';
+import * as mongoose from 'mongoose';
+
  
 class PostsController implements Controller {
   public path = '/posts';
@@ -36,6 +38,7 @@ class PostsController implements Controller {
  
   private getAllPosts = (request: express.Request, response: express.Response) => {
     this.post.find()
+    .populate('user')
       .then((posts) => {
         response.send(posts);
       });
@@ -44,6 +47,7 @@ class PostsController implements Controller {
   private getPostById = (request: express.Request, response: express.Response) => {
     const id = request.params.id;
     this.post.findById(id)
+    .populate('user')
       .then((post) => {
         if (post) {
           response.send(post);
@@ -57,6 +61,7 @@ class PostsController implements Controller {
     const id = request.params.id;
     const postData: Post = request.body;
     this.post.findByIdAndUpdate(id, postData, { new: true })
+    .populate('user')
       .then((post) => {
         response.send(post);
       });
@@ -88,6 +93,7 @@ class PostsController implements Controller {
 //function for handeling users url
 private getAllUsers = (request: express.Request, response: express.Response) => {
   this.user.find()
+  .populate('post')
     .then((users) => {
       response.send(users);
     });
@@ -96,6 +102,7 @@ private getAllUsers = (request: express.Request, response: express.Response) => 
 private getUserById = (request: express.Request, response: express.Response) => {
   const id = request.params.id;
   this.user.findById(id)
+  .populate('post')
     .then((user) => {
       if (user) {
         response.send(user);
@@ -109,6 +116,7 @@ private modifyUser = (request: express.Request, response: express.Response) => {
   const id = request.params.id;
   const postData: User = request.body;
   this.user.findByIdAndUpdate(id, postData, { new: true })
+  .populate('post')
     .then((user) => {
       response.send(user);
     });

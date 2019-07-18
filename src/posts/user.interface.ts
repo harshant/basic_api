@@ -1,7 +1,8 @@
 interface User {
-    email: String,
-    name: String,
-    posts: String[]
+    name: string;
+    post: string[];
+    number: number;
+    boolean: boolean;
   }
    
   export default User;

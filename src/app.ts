@@ -38,7 +38,7 @@ class App {
   }
  
   private connectToTheDatabase() {
-    mongoose.connect(`mongodb://localhost:27017/demodb`,{ useNewUrlParser: true });
+    mongoose.connect(`mongodb://localhost:27017/new`,{ useNewUrlParser: true });
   }
 }
  
